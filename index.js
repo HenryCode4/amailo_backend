@@ -23,7 +23,7 @@ const app = express();
 app.use(
     cors({
         credentials: true,
-        origin: ["http://localhost:3000"],
+        origin: ["https://amailo.vercel.app"],
     })
     );
 
