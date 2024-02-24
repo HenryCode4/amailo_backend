@@ -14,7 +14,38 @@ router.get("/", handler( async (req, res) => {
     res.send(foods);
   }));
 
-router.get("/tags", handler( async (req, res) => {
+// router.get("/tags", handler( async (req, res) => {
+//     const tags = await FoodModel.aggregate([
+//         {
+//             $unwind: '$tags',
+//         },
+//         {
+//             $group: {
+//                 _id: '$tags',
+//                 count: {$sum: 1},
+//             },
+//         },
+//         {
+//             $project: {
+//                 _id: 0,
+//                 name: '$_id',
+//                 count: '$count',
+//             }
+//         }
+//     ]).sort({count: -1});
+
+//     const all = {
+//         name: 'All', 
+//         count: await FoodModel.countDocuments(),
+//     };
+
+//     tags.unshift(all);
+
+
+//     res.send(tags);
+//   }));
+
+router.get("/tags", handler(async (req, res) => {
     const tags = await FoodModel.aggregate([
         {
             $unwind: '$tags',
@@ -22,7 +53,8 @@ router.get("/tags", handler( async (req, res) => {
         {
             $group: {
                 _id: '$tags',
-                count: {$sum: 1},
+                count: { $sum: 1 },
+                imageUrl: { $first: '$imageUrl' }, // Include imageUrl for each tag
             },
         },
         {
@@ -30,20 +62,20 @@ router.get("/tags", handler( async (req, res) => {
                 _id: 0,
                 name: '$_id',
                 count: '$count',
+                imageUrl: 1, // Project the imageUrl field
             }
         }
-    ]).sort({count: -1});
+    ]).sort({ count: -1 });
 
     const all = {
-        name: 'All', 
+        name: 'All',
         count: await FoodModel.countDocuments(),
     };
 
     tags.unshift(all);
 
-
     res.send(tags);
-  }));
+}));
 
 
 router.get("/search/:searchTerm", handler( async (req, res) => {

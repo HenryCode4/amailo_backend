@@ -69,14 +69,14 @@ export const sample_foods = [
   
 
   export const sample_tags = [
-    { name: 'All', count: 6 },
-    { name: 'Chicken Republic', count: 4 },
-    { name: 'Dominos', count: 2 },
-    { name: 'The Place', count: 3 },
-    { name: 'Placebo', count: 2 },
-    { name: 'Mr Biggs', count: 1 },
-    { name: 'Chinese Restaurant', count: 1 },
-    { name: 'Upscale Restaurant', count: 1 },
+    { name: 'All', count: 6, imageUrl: 'all.jpg', },
+    { name: 'Chicken Republic', count: 4, imageUrl: 'chicken.png', },
+    { name: 'Dominos', count: 2, imageUrl: 'dominos.png', },
+    { name: 'The Place', count: 3, imageUrl: 'place.png', },
+    { name: 'Placebo', count: 2, imageUrl: 'placebo.png', },
+    { name: 'Mr Biggs', count: 1, imageUrl: 'biggs.jpg',},
+    { name: 'Chinese Restaurant', count: 1, imageUrl: 'chinese.jpg',},
+    { name: 'Upscale Restaurant', count: 1, imageUrl: 'taste.png'},
   ];
   
   
