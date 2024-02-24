@@ -20,12 +20,12 @@ const app = express();
 
  app.use(express.json());
 
-app.use(
+ app.use(
     cors({
         credentials: true,
-        origin: ["https://amailo.vercel.app"],
+        origin: ["https://amailo.vercel.app", "http://localhost:3000"],
     })
-    );
+);
 
 app.use('/api/foods', foodRouter);
 app.use('/api/users', userRouter);
