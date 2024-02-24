@@ -1,6 +1,7 @@
 import { Router } from "express";
 import handler from 'express-async-handler'
 import {FoodModel} from "../models/food.model.js";
+import { sample_tags } from "../data.js";
 
 
 
@@ -54,7 +55,6 @@ router.get("/tags", handler(async (req, res) => {
             $group: {
                 _id: '$tags',
                 count: { $sum: 1 },
-                imageUrl: { $first: '$imageUrl' }, // Include imageUrl for each tag
             },
         },
         {
@@ -62,7 +62,6 @@ router.get("/tags", handler(async (req, res) => {
                 _id: 0,
                 name: '$_id',
                 count: '$count',
-                imageUrl: 1, // Project the imageUrl field
             }
         }
     ]).sort({ count: -1 });
@@ -74,8 +73,22 @@ router.get("/tags", handler(async (req, res) => {
 
     tags.unshift(all);
 
-    res.send(tags);
+    // Mapping tags to include imageUrlTags
+    const tagsWithImages = tags.map(tag => {
+        const sampleTag = sample_tags.find(sampleTag => sampleTag.name === tag.name);
+        if (sampleTag) {
+            return {
+                ...tag,
+                imageUrl: sampleTag.imageUrlTags, // Use imageUrlTags from sample_tags
+            };
+        } else {
+            return tag;
+        }
+    });
+
+    res.send(tagsWithImages);
 }));
+
 
 
 router.get("/search/:searchTerm", handler( async (req, res) => {
