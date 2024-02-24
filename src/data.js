@@ -74,7 +74,7 @@ export const sample_foods = [
     { name: 'Dominos', count: 2, imageUrlTags: 'dominos.png', },
     { name: 'The Place', count: 3, imageUrlTags: 'place.png', },
     { name: 'Placebo', count: 2, imageUrlTags: 'placebo.png', },
-    { name: 'Mr Biggs', count: 1, imageUrlTags: 'biggs.jpg',},
+    { name: 'Mr Biggs', count: 1, imageUrlTags: 'biggs.png',},
     { name: 'Chinese Restaurant', count: 1, imageUrlTags: 'chinese.jpg',},
     { name: 'Upscale Restaurant', count: 1, imageUrlTags: 'taste.png'},
   ];
