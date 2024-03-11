@@ -47,94 +47,47 @@ router.get("/", handler( async (req, res) => {
 //     res.send(tags);
 //   }));
 
-// router.get("/tags", handler(async (req, res) => {
-//     const tags = await FoodModel.aggregate([
-//         {
-//             $unwind: '$tags',
-//         },
-//         {
-//             $group: {
-//                 _id: '$tags',
-//                 count: { $sum: 1 },
-//             },
-//         },
-//         {
-//             $project: {
-//                 _id: 0,
-//                 name: '$_id',
-//                 count: '$count',
-//             }
-//         }
-//     ]).sort({ count: -1 });
-
-//     const all = {
-//         name: 'All',
-//         count: await FoodModel.countDocuments(),
-//     };
-
-//     tags.unshift(all);
-
-//     // Mapping tags to include imageUrlTags
-//     const tagsWithImages = tags.map(tag => {
-//         const sampleTag = sample_tags.find(sampleTag => sampleTag.name === tag.name);
-//         if (sampleTag) {
-//             return {
-//                 ...tag,
-//                 imageUrl: sampleTag.imageUrlTags, // Use imageUrlTags from sample_tags
-//             };
-//         } else {
-//             return tag;
-//         }
-//     });
-
-//     res.send(tagsWithImages);
-// }));
-
 router.get("/tags", handler(async (req, res) => {
-  // Retrieve tags from the database
-  const tagsFromDB = await FoodModel.aggregate([
-      {
-          $unwind: '$tags',
-      },
-      {
-          $group: {
-              _id: '$tags',
-              count: { $sum: 1 },
-          },
-      },
-      {
-          $project: {
-              _id: 0,
-              name: '$_id',
-              count: '$count',
-          }
-      }
-  ]).sort({ count: -1 });
+    const tags = await FoodModel.aggregate([
+        {
+            $unwind: '$tags',
+        },
+        {
+            $group: {
+                _id: '$tags',
+                count: { $sum: 1 },
+            },
+        },
+        {
+            $project: {
+                _id: 0,
+                name: '$_id',
+                count: '$count',
+            }
+        }
+    ]).sort({ count: -1 });
 
-  // Create an array to store final tags data
-  const tagsWithImages = [];
+    const all = {
+        name: 'All',
+        count: await FoodModel.countDocuments(),
+    };
 
-  // Iterate through tags from the database and add imageTags if available
-  for (const tag of tagsFromDB) {
-      const dbTag = await FoodModel.findOne({ tags: tag.name }, { imageTags: 1 }).lean();
-      tagsWithImages.push({
-          ...tag,
-          imageTags: dbTag ? dbTag.imageTags : null, // Use imageTags from the database if available
-      });
-  }
+    tags.unshift(all);
 
-  // Sort tags by count in descending order
-  tagsWithImages.sort((a, b) => b.count - a.count);
+    // Mapping tags to include imageUrlTags
+    const tagsWithImages = tags.map(tag => {
+        const sampleTag = sample_tags.find(sampleTag => sampleTag.name === tag.name);
+        if (sampleTag) {
+            return {
+                ...tag,
+                imageUrl: sampleTag.imageUrlTags, // Use imageUrlTags from sample_tags
+            };
+        } else {
+            return tag;
+        }
+    });
 
-  // Add 'All' tag with total count
-  const all = {
-      name: 'All',
-      count: await FoodModel.countDocuments(),
-      imageTags: '/icons/all.jpg', // Assuming there is an icon for 'All'
-  };
-  tagsWithImages.unshift(all);
-
-  res.send(tagsWithImages);
+    res.send(tagsWithImages);
 }));
 
 
@@ -168,7 +121,7 @@ router.post(
     '/',
     admin,
     handler(async (req, res) => {
-      const { name, price, tags, favorite, imageUrl, imageTag, origins, cookTime } =
+      const { name, price, tags, favorite, imageUrl, origins, cookTime } =
         req.body;
   
       const food = new FoodModel({
@@ -177,7 +130,6 @@ router.post(
         tags: tags.split ? tags.split(',') : tags,
         favorite,
         imageUrl,
-        imageTag,
         origins: origins.split ? origins.split(',') : origins,
         cookTime,
       });
@@ -192,7 +144,7 @@ router.post(
     '/',
     admin,
     handler(async (req, res) => {
-      const { id, name, price, tags, favorite, imageUrl, imageTag, origins, cookTime } =
+      const { id, name, price, tags, favorite, imageUrl, origins, cookTime } =
         req.body;
   
       await FoodModel.updateOne(
@@ -203,7 +155,6 @@ router.post(
           tags: tags.split ? tags.split(',') : tags,
           favorite,
           imageUrl,
-          imageTag,
           origins: origins.split ? origins.split(',') : origins,
           cookTime,
         }

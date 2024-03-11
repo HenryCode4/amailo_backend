@@ -8,7 +8,6 @@ export const FoodSchema = new Schema(
     favorite: { type: Boolean, default: false },
     stars: { type: Number, default: 3 },
     imageUrl: { type: String, required: true },
-    imageTags: { type: String }, // New field for image tags
     origins: { type: [String], required: true },
     cookTime: { type: String, required: true },
   },
