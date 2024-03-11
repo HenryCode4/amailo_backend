@@ -28,18 +28,14 @@ const uploadImageToCloudinary = imageBuffer => {
   const cloudinary = configCloudinary();
 
   return new Promise((resolve, reject) => {
-    if (!imageBuffer) {
-      reject('No image data provided');
-      return;
-    }
+    if (!imageBuffer) reject(null);
 
-    cloudinary.uploader.upload_stream((error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result.url);
-      }
-    }).end(imageBuffer);
+    cloudinary.uploader
+      .upload_stream((error, result) => {
+        if (error || !result) reject(error);
+        else resolve(result.url);
+      })
+      .end(imageBuffer);
   });
 };
 
