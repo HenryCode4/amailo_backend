@@ -7,8 +7,6 @@ import admin from '../middleware/admin.mid.js';
 
 
 
-
-
 const router = Router();
 
 router.get("/", handler( async (req, res) => {
@@ -118,52 +116,53 @@ router.get('/:foodId', handler( async (req, res)=> {
 
 
 router.post(
-  '/',
-  admin,
-  handler(async (req, res) => {
-      const { name, price, tags, favorite, imageUrl, origins, cookTime } = req.body;
-
+    '/',
+    admin,
+    handler(async (req, res) => {
+      const { name, price, tags, favorite, imageUrl, imageUrlTags, origins, cookTime } =
+        req.body;
+  
       const food = new FoodModel({
+        name,
+        price,
+        tags: tags.split ? tags.split(',') : tags,
+        favorite,
+        imageUrl,
+        imageUrlTags,
+        origins: origins.split ? origins.split(',') : origins,
+        cookTime,
+      });
+  
+      await food.save();
+  
+      res.send(food);
+    })
+  );
+  
+  router.put(
+    '/',
+    admin,
+    handler(async (req, res) => {
+      const { id, name, price, tags, favorite, imageUrl, imageUrlTags, origins, cookTime } =
+        req.body;
+  
+      await FoodModel.updateOne(
+        { _id: id },
+        {
           name,
           price,
-          tags, // Assuming tags already contain both tag name and imageUrlTags
+          tags: tags.split ? tags.split(',') : tags,
           favorite,
           imageUrl,
+          imageUrlTags,
           origins: origins.split ? origins.split(',') : origins,
           cookTime,
-      });
-
-      await food.save();
-
-      res.send(food);
-  })
-);
-
-  
-router.put(
-  '/',
-  admin,
-  handler(async (req, res) => {
-      const { id, name, price, tags, favorite, imageUrl, origins, cookTime } = req.body;
-
-      await FoodModel.updateOne(
-          { _id: id },
-          {
-              name,
-              price,
-              tags, // Assuming tags already contain both tag name and imageUrlTags
-              favorite,
-              imageUrl,
-              origins: origins.split ? origins.split(',') : origins,
-              cookTime,
-          }
+        }
       );
-
+  
       res.send();
-  })
-);
-
-
+    })
+  );
   
   router.delete(
     '/:foodId',
