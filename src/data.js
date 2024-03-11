@@ -8,7 +8,6 @@ export const sample_foods = [
       origins: ['italy'],
       stars: 4.5,
       imageUrl: 'food-1.jpg',
-      imageUrlTags: "/icons/dominos.png",
       tags: ['Dominos'],
     },
     {
@@ -20,7 +19,6 @@ export const sample_foods = [
       origins: ['persia', 'middle east', 'china'],
       stars: 5,
       imageUrl: 'food-2.jpg',
-      imageUrlTags: "/icons/chinese.jpg",
       tags: ['Chicken Republic', 'The Place'],
     },
     {
@@ -43,7 +41,6 @@ export const sample_foods = [
       origins: ['belgium', 'france'],
       stars: 3,
       imageUrl: 'food-4.jpg',
-      imageUrlTags: "/icons/placebo.png",
       tags: ['Placebo'],
     },
     {
@@ -55,7 +52,6 @@ export const sample_foods = [
       origins: ['india', 'asia'],
       stars: 3.5,
       imageUrl: 'food-5.jpg',
-      imageUrlTags: "/icons/chinese.jpg",
       tags: ['Upscale Restaurant', 'Chinese Restaurant'],
     },
     {
@@ -67,7 +63,6 @@ export const sample_foods = [
       origins: ['italy'],
       stars: 4.0,
       imageUrl: 'food-6.jpg',
-      imageUrlTags: "/icons/dominos.png",
       tags: ['Dominos'],
     },
   ];
@@ -75,13 +70,13 @@ export const sample_foods = [
 
   export const sample_tags = [
     { name: 'All', count: 6, imageUrlTags: 'all.jpg', },
-    { name: 'Chicken Republic', count: 4, imageUrlTags: '/icons/chicken.png', },
-    { name: 'Dominos', count: 2, imageUrlTags: '/icons/dominos.png', },
-    { name: 'The Place', count: 3, imageUrlTags: '/icons/place.png', },
-    { name: 'Placebo', count: 2, imageUrlTags: '/icons/placebo.png', },
-    { name: 'Mr Biggs', count: 1, imageUrlTags: '/icons/biggs.png',},
-    { name: 'Chinese Restaurant', count: 1, imageUrlTags: '/icons/chinese.jpg',},
-    { name: 'Upscale Restaurant', count: 1, imageUrlTags: '/icons/taste.png'},
+    { name: 'Chicken Republic', count: 4, imageUrlTags: 'chicken.png', },
+    { name: 'Dominos', count: 2, imageUrlTags: 'dominos.png', },
+    { name: 'The Place', count: 3, imageUrlTags: 'place.png', },
+    { name: 'Placebo', count: 2, imageUrlTags: 'placebo.png', },
+    { name: 'Mr Biggs', count: 1, imageUrlTags: 'biggs.png',},
+    { name: 'Chinese Restaurant', count: 1, imageUrlTags: 'chinese.jpg',},
+    { name: 'Upscale Restaurant', count: 1, imageUrlTags: 'taste.png'},
   ];
   
   
