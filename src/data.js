@@ -8,7 +8,7 @@ export const sample_foods = [
       origins: ['italy'],
       stars: 4.5,
       imageUrl: 'food-1.jpg',
-      imageUrlTags: 'food-1.jpg',
+      imageTag: 'food-1.jpg',
       tags: ['Dominos'],
     },
     {
@@ -20,7 +20,7 @@ export const sample_foods = [
       origins: ['persia', 'middle east', 'china'],
       stars: 5,
       imageUrl: 'food-2.jpg',
-      imageUrlTags: 'food-2.jpg',
+      imageTag: 'food-2.jpg',
       tags: ['Chicken Republic', 'The Place'],
     },
     {
@@ -43,7 +43,6 @@ export const sample_foods = [
       origins: ['belgium', 'france'],
       stars: 3,
       imageUrl: 'food-4.jpg',
-      imageUrlTags: 'food-4.jpg',
       tags: ['Placebo'],
     },
     {
@@ -55,7 +54,7 @@ export const sample_foods = [
       origins: ['india', 'asia'],
       stars: 3.5,
       imageUrl: 'food-5.jpg',
-      imageUrlTags: 'food-5.jpg',
+      imageTag: 'food-5.jpg',
       tags: ['Upscale Restaurant', 'Chinese Restaurant'],
     },
     {
@@ -67,7 +66,7 @@ export const sample_foods = [
       origins: ['italy'],
       stars: 4.0,
       imageUrl: 'food-6.jpg',
-      imageUrlTags: 'food-6.jpg',
+      imageTag: 'food-6.jpg',
       tags: ['Dominos'],
     },
   ];

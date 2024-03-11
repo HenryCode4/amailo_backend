@@ -7,6 +7,8 @@ import admin from '../middleware/admin.mid.js';
 
 
 
+
+
 const router = Router();
 
 router.get("/", handler( async (req, res) => {
@@ -119,7 +121,7 @@ router.post(
     '/',
     admin,
     handler(async (req, res) => {
-      const { name, price, tags, favorite, imageUrl, imageUrlTags, origins, cookTime } =
+      const { name, price, tags, favorite, imageUrl, imageTag, origins, cookTime } =
         req.body;
   
       const food = new FoodModel({
@@ -128,7 +130,7 @@ router.post(
         tags: tags.split ? tags.split(',') : tags,
         favorite,
         imageUrl,
-        imageUrlTags,
+        imageTag,
         origins: origins.split ? origins.split(',') : origins,
         cookTime,
       });
@@ -143,7 +145,7 @@ router.post(
     '/',
     admin,
     handler(async (req, res) => {
-      const { id, name, price, tags, favorite, imageUrl, imageUrlTags, origins, cookTime } =
+      const { id, name, price, tags, favorite, imageUrl, imageTag, origins, cookTime } =
         req.body;
   
       await FoodModel.updateOne(
@@ -154,7 +156,7 @@ router.post(
           tags: tags.split ? tags.split(',') : tags,
           favorite,
           imageUrl,
-          imageUrlTags,
+          imageTag,
           origins: origins.split ? origins.split(',') : origins,
           cookTime,
         }
