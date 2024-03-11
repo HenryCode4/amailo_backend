@@ -24,7 +24,7 @@ const app = express();
  app.use(
     cors({
         credentials: true,
-        origin: ["https://amailo.vercel.app", "http://localhost:3000"],
+        origin: ["https://amailo.vercel.app", "http://localhost:3000", 'https://cloudinary.com'],
     })
 );
 
